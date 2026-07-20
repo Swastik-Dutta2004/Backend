@@ -1,9 +1,8 @@
 const app = require("./src/app")
+const connectDB = require("./src/db/db")
 
-const connecteddDB = require("./src/db/db")
+connectDB()
 
-connecteddDB()
-
-app.listen(6969, () => {
-    console.log("Fuck off")
+app.listen(6969 , () =>{
+    console.log("Server running on post no. 6969");
 })
