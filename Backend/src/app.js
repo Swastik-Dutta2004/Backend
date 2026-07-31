@@ -21,7 +21,7 @@ app.post("/create-post", upload.single("Image"), async (req, res) => {
 
     return res.status(201).json({
         message: "Post created successfully.",
-        post
+        posts: post
     })
 
 })
@@ -30,9 +30,9 @@ app.post("/create-post", upload.single("Image"), async (req, res) => {
 app.get("/post", async (req,res) => {
     const post = await postModel.find()
 
-    return res.status(201).json({
+    return res.status(200).json({
         message: "All post are found.",
-        post
+        posts: post
     })
 })
 

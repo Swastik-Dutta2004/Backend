@@ -1,0 +1,6 @@
+so there are 4 steps of authencation 
+step 1 :- validation => Its check the format of the data that user is giving.
+step 2 :- verificatoin => Its checks that given data which is in correct format is it valit data or not.
+step 3 :- Authencation => Its checks user has login or not with the required data.
+step 4 :- Authorization => Its checks which types of user which types of featuers can used.
+
