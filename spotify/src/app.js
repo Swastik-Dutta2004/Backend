@@ -1,8 +1,14 @@
 const express = require("express")
 const cookiesParser = require("cookie-parser")
+const ConnectDB = require("./db/db")
+const authRouter = require("./routes/user.routes")
 
 const app = express()
 app.use(express.json())
 app.use(cookiesParser())
+
+app.use("/auth/api", authRouter)
+
+ConnectDB()
 
 module.exports = app
