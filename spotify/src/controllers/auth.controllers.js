@@ -56,32 +56,34 @@ async function login(req, res) {
         ]
     })
 
-    if (credentails) {
+    if (!credentails) {
         return res.status(401).json({
             message: "Invalid credentials."
         })
     }
 
-    const isUserLoggedIn = await bcrypt.compare(password, newUser.password)
+    const isUserLoggedIn = await bcrypt.compare(password, credentails.password)
 
-    if (isUserLoggedIn) {
-        return res.status(401).json({
+    if (!isUserLoggedIn) {
+        return res.status(409).json({
             message: "User is not register."
         })
     }
 
     const token = await jwt.sign({
-        id: newUser._id,
-        role: newUser.role
-    })
+        id: credentails._id,
+        role: credentails.role
+    }, process.env.JWT_SECRET)
 
-    return res.status(401).json({
+    res.cookie("token", token)
+
+    return res.status(200).json({
         message: "User has successfully logged in.",
         newUser: {
-            id: newUser._id,
-            password: newUser.password,
-            email: newUser.email,
-            role: newUser.role
+            id: credentails._id,
+            password: credentails.password,
+            email: credentails.email,
+            role: credentails.role
         }
     })
 }
