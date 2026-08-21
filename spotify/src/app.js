@@ -7,7 +7,7 @@ const app = express()
 app.use(express.json())
 app.use(cookiesParser())
 
-app.use("/auth/api", authRouter)
+app.use("/api/auth", authRouter)
 
 ConnectDB()
 

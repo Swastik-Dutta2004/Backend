@@ -44,3 +44,46 @@ async function register(req, res) {
         }
     })
 }
+
+
+async function login(req, res) {
+    const { username, email, password } = req.body
+
+    const credentails = await userModel.findOne({
+        $or: [
+            { username },
+            { email }
+        ]
+    })
+
+    if (credentails) {
+        return res.status(401).json({
+            message: "Invalid credentials."
+        })
+    }
+
+    const isUserLoggedIn = await bcrypt.compare(password, newUser.password)
+
+    if (isUserLoggedIn) {
+        return res.status(401).json({
+            message: "User is not register."
+        })
+    }
+
+    const token = await jwt.sign({
+        id: newUser._id,
+        role: newUser.role
+    })
+
+    return res.status(401).json({
+        message: "User has successfully logged in.",
+        newUser: {
+            id: newUser._id,
+            password: newUser.password,
+            email: newUser.email,
+            role: newUser.role
+        }
+    })
+}
+
+module.exports = { register, login }
