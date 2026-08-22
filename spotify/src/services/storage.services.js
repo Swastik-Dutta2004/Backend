@@ -1,10 +1,10 @@
 const {ImageKit} = require("@imagekit/nodejs")
 
-const ImageKitCllient = new ImageKit({
+const ImageKitClient = new ImageKit({
     privateKey: process.env.IMAGEKIY_PRIVATE_KEY
 })
-async function uploade(file) {
-    const result = ImageKitCllient.files.upload({
+async function uploadeFile(file) {
+    const result = ImageKitClient.files.upload({
         file,
         filename: "music_" + Date.now(),
         folder: "complete_backend/music"
@@ -13,4 +13,4 @@ async function uploade(file) {
     return result
 }
 
-module.exports = uploade
+module.exports = uploadeFile

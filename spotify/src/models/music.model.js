@@ -1,7 +1,7 @@
 const { default: mongoose } = require("mongoose");
-const musicMoldules = require("mongoose")
+const musicModel = require("mongoose")
 
-const musicSchema = new musicMoldules.Sch({
+const musicSchema = new musicModel.Schema({
     uri: {
         type: String,
         require: true
@@ -19,6 +19,6 @@ const musicSchema = new musicMoldules.Sch({
     }
 })
 
-const musicModule = mongoose.model("music", musicSchema)
+const musicModel = mongoose.model("music", musicSchema)
 
-module.exports = musicModule
+module.exports = musicModel
