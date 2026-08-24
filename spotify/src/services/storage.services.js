@@ -1,12 +1,13 @@
-const {ImageKit} = require("@imagekit/nodejs")
+const { ImageKit } = require("@imagekit/nodejs")
 
 const ImageKitClient = new ImageKit({
-    privateKey: process.env.IMAGEKIY_PRIVATE_KEY
+    privateKey: process.env.IMAGEKIT_PRIVATE_KEY
 })
+
 async function uploadeFile(file) {
-    const result = ImageKitClient.files.upload({
+    const result = await ImageKitClient.files.upload({
         file,
-        filename: "music_" + Date.now(),
+        fileName: "music_" + Date.now(),
         folder: "complete_backend/music"
     })
 

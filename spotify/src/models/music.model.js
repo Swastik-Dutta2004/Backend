@@ -1,24 +1,21 @@
-const { default: mongoose } = require("mongoose");
-const musicModel = require("mongoose")
+const mongoose = require("mongoose")
 
-const musicSchema = new musicModel.Schema({
+const musicSchema = new mongoose.Schema({
     uri: {
         type: String,
-        require: true
+        required: true
     },
-
     title: {
         type: String,
-        require: true
+        required: true
     },
-
     artist: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
-        require: true  
+        required: true
     }
 })
 
-const musicModel = mongoose.model("music", musicSchema)
+const musicModel = mongoose.model("Music", musicSchema)
 
 module.exports = musicModel
