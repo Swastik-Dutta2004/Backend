@@ -9,7 +9,7 @@ app.use(express.json())
 app.use(cookiesParser())
 
 app.use("/api/auth", authRouter)
-app.use("/api/auth", musicRouter)
+app.use("/api/music", musicRouter)
 
 
 ConnectDB()
