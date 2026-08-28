@@ -1,6 +1,6 @@
 const musicModel = require("../models/music.model")
-const uploadeFile = require("../services/storage.services")
 const albumModel = require("../models/album.model")
+const uploadeFile = require("../services/storage.services")
 
 async function CreateMusic(req, res) {
 
@@ -56,13 +56,48 @@ async function CreateAlbum(req, res) {
 }
 
 async function getAllMusic(req, res) {
-    const allMusic = await musicModel.find()
+    const allMusic = await musicModel.find().populate("artist")
 
     return res.status(200).json({
         message: "Music featched successfully.",
         musis: allMusic,
     })
+
+}
+
+
+async function getAllAlbum(req, res) {
+    try {
+        const allAlbum = await albumModel
+            .find()
+            .select("title artist")
+            .populate("artist", "username")
+
+        return res.status(200).json({
+            message: "Albums are fetched successfully.",
+            album: allAlbum
+        })
+
+    } catch (error) {
+        console.log(error)
+
+        return res.status(500).json({
+            message: error.message
+        })
+    }
+}
+
+
+async function getAlbumById(req, res) {
+    const albumId = req.params.albumId
+
+    const album = await albumModel.findById(albumId).populate("artist", "username email")
+
+    return res.status(200).json({
+        message: "Album fetched successfully.",
+        album: album
+    })
     
 }
 
-module.exports = { CreateMusic, CreateAlbum, getAllMusic } 
+module.exports = { CreateMusic, CreateAlbum, getAllMusic, getAllAlbum, getAlbumById } 
